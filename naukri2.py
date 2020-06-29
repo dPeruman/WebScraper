@@ -101,14 +101,6 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                     phone_no = 'None'
                     email = 'None'
                     web_ = 'None'
-
-                try:
-                    skills = soup.findAll('li', class_='fleft fs12 grey-text lh16 dot')
-                    #print(skills[0].text)
-                    skill_list = [x.text for x in skills]
-                except:
-                    skill_list = 'None'
-
                 try:
                     location = soup.find('li',class_='location')
                     location = location.span['title'].strip()
@@ -120,6 +112,13 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                     company = soup.find('div', class_="companyInfo").a.text.strip()
                 except:
                     company = 'None'
+
+                try:
+                    skills = soup.findAll('li', class_='fleft fs12 grey-text lh16 dot')
+                    #print(skills[0].text)
+                    skill_list = [x.text for x in skills]
+                except:
+                    skill_list = 'None'
 
                 try:
                     salary = soup.find('li', class_="salary").span.text.strip()
@@ -145,7 +144,7 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                     qualifications = dict(zip(level,quals))
                     del(level,quals)
 
-                    print(qualifications)
+                    #print(qualifications)
                     
 
                 except :
