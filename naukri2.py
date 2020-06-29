@@ -4,15 +4,21 @@ from bs4 import BeautifulSoup
 import requests
 from urllib.request import urlopen
 
-## Download the chromedriver from link in description
+## Download the chromedriver
 ## And give the location of executable here
 driver = webdriver.Chrome("C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe")
 def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
-    
+    """This function scrappes data from naukri.com
+
+    Args:
+        dataframe (pandas dataframe): [it stores the data]
+        sk (str, optional): [skill]. Defaults to 'ai'.
+        exp (int, optional): [experience]. Defaults to 3.
+        loc (str, optional): [loaction]. Defaults to 'bangalore'.
+    """    
     sk = sk #skill
     exp = 'experience='+str(exp) # experience
     loc = loc #location
-    
 
     for i in range(1,5):
 
@@ -44,7 +50,7 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                     soup2 = BeautifulSoup(details.get_attribute('innerHTML'), 'html.parser')
 
                     """
-                    
+
                 except :
                     href = 'None'
                     desc_url = 'None'
@@ -71,7 +77,7 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                         recruiter_name = temp[Index]
                     else:
                         recruiter_name = 'None'
-                    
+
                     if(labels_original[1] in labels):
                         Index = labels.index(labels_original[1])
                         phone_no = temp[Index]
@@ -83,7 +89,7 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                         email = temp[Index]
                     else:
                         email = 'None'
-                    
+
                     if(labels_original[3] in labels):
                         Index = labels.index(labels_original[3])
                         web_ = temp[Index]
@@ -95,7 +101,7 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                     phone_no = 'None'
                     email = 'None'
                     web_ = 'None'
-                
+
                 try:
                     skills = soup.findAll('li', class_='fleft fs12 grey-text lh16 dot')
                     #print(skills[0].text)
@@ -121,7 +127,7 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                         salary = 'None'
                 except:
                     salary = 'None'
-                
+
                 try:
                     experience = soup.find('li', class_='experience').span.text.strip()
                 except :
@@ -152,7 +158,7 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                                         'Skill set required':skill_list, 'Description url':desc_url, 'Salary offered':salary,
                                         'Experience required':experience, 'Qualification required':qualifications},ignore_index=True)
 
-    #driver.close()
+    driver.close()
     dataframe.to_csv("naukri.csv",index=False)
 
 
@@ -163,3 +169,5 @@ if(__name__=='__main__'):
                                         'Experience required', 'Qualification required'])
 
     naukri_scrapper(dataframe)
+
+#
