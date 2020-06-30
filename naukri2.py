@@ -52,8 +52,8 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                     """
 
                 except :
-                    href = 'None'
-                    desc_url = 'None'
+                    href = 'NaN'
+                    desc_url = 'NaN'
                 try:
                     1/0 #TODO 2. remove this line, when todo 1 is done.
                     complete_info = soup2.findAll('div', class_='comp-info-detail')
@@ -76,61 +76,61 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                         Index = labels.index(labels_original[0])
                         recruiter_name = temp[Index]
                     else:
-                        recruiter_name = 'None'
+                        recruiter_name = 'NaN'
 
                     if(labels_original[1] in labels):
                         Index = labels.index(labels_original[1])
                         phone_no = temp[Index]
                     else:
-                        phone_no = 'None'
+                        phone_no = 'NaN'
                 
                     if(labels_original[2] in labels):
                         Index = labels.index(labels_original[2])
                         email = temp[Index]
                     else:
-                        email = 'None'
+                        email = 'NaN'
 
                     if(labels_original[3] in labels):
                         Index = labels.index(labels_original[3])
                         web_ = temp[Index]
                     else:
-                        web_ = 'None'
+                        web_ = 'NaN'
                     del(labels,temp,x,y)
                 except :
-                    recruiter_name = 'None'
-                    phone_no = 'None'
-                    email = 'None'
-                    web_ = 'None'
+                    recruiter_name = 'NaN'
+                    phone_no = 'NaN'
+                    email = 'NaN'
+                    web_ = 'NaN'
                 try:
                     location = soup.find('li',class_='location')
                     location = location.span['title'].strip()
                     #print(location)
                 except:
-                    location = 'None'
+                    location = 'NaN'
 
                 try:
                     company = soup.find('div', class_="companyInfo").a.text.strip()
                 except:
-                    company = 'None'
+                    company = 'NaN'
 
                 try:
                     skills = soup.findAll('li', class_='fleft fs12 grey-text lh16 dot')
                     #print(skills[0].text)
                     skill_list = [x.text for x in skills]
                 except:
-                    skill_list = 'None'
+                    skill_list = 'NaN'
 
                 try:
                     salary = soup.find('li', class_="salary").span.text.strip()
                     if(salary == 'Not disclosed'):
-                        salary = 'None'
+                        salary = 'NaN'
                 except:
-                    salary = 'None'
+                    salary = 'NaN'
 
                 try:
                     experience = soup.find('li', class_='experience').span.text.strip()
                 except :
-                    experience = 'None'
+                    experience = 'NaN'
 
                 try:
                     1/0 # TODO 3. comment this line of todo 1 and todo 2 are done
@@ -148,7 +148,7 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                     
 
                 except :
-                    qualifications = 'None'
+                    qualifications = 'NaN'
                 #driver.close()
                 #driver.switch_to.window(driver.window_handles[0])
 
