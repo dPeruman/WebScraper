@@ -7,8 +7,8 @@ from urllib.request import urlopen
 ## Download the chromedriver
 ## And give the location of executable here
 driver = webdriver.Chrome("C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe")
-def monster_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
-    """This function scrappes data from monsterindia.com
+def monster_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
+    """This function scrapes data from monsterindia.com
 
     Args:
         dataframe (pandas dataframe): [it stores the data]
@@ -168,7 +168,7 @@ def monster_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                     qualifications = 'NaN'
                 #driver.close()
                 #driver.switch_to.window(driver.window_handles[0])
-                
+
                 """
                 qualifications = 'NaN'
                 
@@ -189,6 +189,6 @@ if(__name__=='__main__'):
                                         'Skill set required', 'Description url', 'Salary offered',
                                         'Experience required', 'Qualification required'])
 
-    monster_scrapper(dataframe)
+    monster_scraper(dataframe)
 
 
