@@ -21,7 +21,7 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
     exp = 'experience='+str(exp) # experience
     loc = loc #location
 
-    for i in range(1,5):
+    for i in range(1,1000):
 
             if(i == 1):
             ##Step1: Get the page
@@ -31,9 +31,11 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
             #url = 'https://www.naukri.com/ai-jobs-in-bangalore?experience=11'
             driver.get(url)#TODO make it generic
             driver.implicitly_wait(4)
-
+            if(i == 1):
+                limit = driver.find_element_by_class_name('sortAndH1Cont')
+                limit = int(limit.text.replace(' ',',').replace('\n',',').split(',')[4])/20
             all_jobs = driver.find_elements_by_class_name('jobTuple')
-            print(all_jobs)
+            #print(all_jobs)
             for job in all_jobs:
 
                 result_html = job.get_attribute('innerHTML')
@@ -59,7 +61,7 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                 try:
                     1/0 #TODO 2. remove this line, when todo 1 is done.
                     complete_info = soup2.findAll('div', class_='comp-info-detail')
-                    print(complete_info)
+                    #print(complete_info)
                     labels = []#to store labels
                     temp = []
                     for i in complete_info:
@@ -71,7 +73,7 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                         else:
                             y = i.span.text
                             temp.append(y)
-                    print(labels)
+                    #print(labels)
                     labels_original = ['Contact Person', 'Phone Number', 'Email', 'Website']
                     
                     if(labels_original[0] in labels):
@@ -158,6 +160,8 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                                         'Company website':web_, 'Job locaion':location, 'Company name':company,
                                         'Skill set required':skill_list, 'Description url':desc_url, 'Salary offered':salary,
                                         'Experience required':experience, 'Qualification required':qualifications},ignore_index=True)
+            if(i >= limit):
+                break
 
     driver.close()
     dataframe.to_csv("naukri.csv",index=False)
