@@ -4,9 +4,10 @@ from bs4 import BeautifulSoup
 import requests
 from urllib.request import urlopen
 
-## Download the chromedriver
+## Download the chromedriver from : https://chromedriver.chromium.org/
 ## And give the location of executable here
-driver = webdriver.Chrome("C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe")
+PATH = "C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe"
+driver = webdriver.Chrome(PATH)
 def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
     """This function scrappes data from naukri.com
 
@@ -41,8 +42,9 @@ def naukri_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                     href = soup.find('a', class_='title')
                     href = href['href']
                     desc_url = href
-                    #TODO 1. un-comment below lines to get recruiter details, but it is very slow to get the details.
+                    
                     """
+                    #TODO 1. un-comment this block of lines to get recruiter details, but it is very slow to get the details.
                     driver.execute_script("window.open('');")
                     driver.switch_to.window(driver.window_handles[1])
                     driver.get(href)
