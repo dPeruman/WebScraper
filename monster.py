@@ -33,6 +33,9 @@ def monster_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
             #all_jobs = soup.findAll('div', class_='card-body')
             c = driver.get(url)#TODO make it generic
             driver.implicitly_wait(4)
+            if(i == 0):
+                limit = driver.find_elements_by_class_name('main-heading')[1].text
+                limit = int(limit[17:])
             all_jobs = driver.find_elements_by_class_name('card-body-apply')
             #print(all_jobs)
             for job in all_jobs:
@@ -165,6 +168,7 @@ def monster_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                     qualifications = 'NaN'
                 #driver.close()
                 #driver.switch_to.window(driver.window_handles[0])
+                
                 """
                 qualifications = 'NaN'
                 
@@ -172,7 +176,9 @@ def monster_scrapper(dataframe, sk='ai', exp=3, loc='bangalore'):
                                         'Company website':web_, 'Job locaion':location, 'Company name':company,
                                         'Skill set required':skill_list, 'Description url':desc_url, 'Salary offered':salary,
                                         'Experience required':experience, 'Qualification required':qualifications},ignore_index=True)
-
+            
+            if((i+100) >= limit):
+                break
     driver.close()
     dataframe.to_csv("monster.csv",index=False)
 
