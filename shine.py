@@ -169,6 +169,6 @@ if(__name__=='__main__'):
                                         'Skill set required', 'Description url', 'Salary offered',
                                         'Experience required', 'Qualification required'])
 
-    shine_scraper(dataframe, sk='doctor', exp=11)
+    shine_scraper(dataframe, sk='doctor', exp=11)#calls shine method
 
 
