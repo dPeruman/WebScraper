@@ -8,7 +8,7 @@ import time
 
 ## Download the chromedriver from : https://chromedriver.chromium.org/
 ## And give the location of executable here
-PATH = "C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe"
+PATH = "./chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
 def shine_scraper(sk='ai', exp=3, loc='bangalore'):
