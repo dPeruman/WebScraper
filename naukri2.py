@@ -6,7 +6,7 @@ from urllib.request import urlopen
 
 ## Download the chromedriver from : https://chromedriver.chromium.org/
 ## And give the location of executable here
-PATH = "C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe"
+PATH = "./chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 def naukri_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
     """This function scrapes data from naukri.com
