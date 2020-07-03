@@ -101,6 +101,6 @@ def indeed_scraper(sk='ai', exp=3, loc='bangalore'):
 
 
 if(__name__=='__main__'):
-    indeed_scraper(dataframe, sk='mechanical engineer')
+    indeed_scraper()
 
 
