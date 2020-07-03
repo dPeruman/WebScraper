@@ -9,7 +9,7 @@ from urllib.request import urlopen
 PATH = "./chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
-def monster_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
+def monster_scraper(sk='ai', exp=3, loc='bangalore'):
     """
     This function scrapes data from monsterindia.com
 
@@ -19,6 +19,10 @@ def monster_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
         exp (int, optional): [experience]. Defaults to 3.
         loc (str, optional): [loaction]. Defaults to 'bangalore'.
     """
+    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
+                                        'Company website', 'Job locaion', 'Company name',
+                                        'Skill set required', 'Description url', 'Salary offered',
+                                        'Experience required', 'Qualification required'])
 
     sk = sk #skill
     exp = str(exp) # experience
@@ -34,7 +38,7 @@ def monster_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
             #source = urlopen(url)
             #soup = BeautifulSoup(source, 'html.parser')
             #all_jobs = soup.findAll('div', class_='card-body')
-            c = driver.get(url)#TODO make it generic
+            driver.get(url)#TODO make it generic
             driver.implicitly_wait(4)
             if(i == 0):
                 limit = driver.find_elements_by_class_name('main-heading')[1].text
@@ -187,10 +191,5 @@ def monster_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
 
 
 if(__name__=='__main__'):
-    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
-                                        'Company website', 'Job locaion', 'Company name',
-                                        'Skill set required', 'Description url', 'Salary offered',
-                                        'Experience required', 'Qualification required'])
-
-    monster_scraper(dataframe)
+    monster_scraper()
 

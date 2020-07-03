@@ -9,7 +9,7 @@ from urllib.request import urlopen
 PATH = "./chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
-def timesJobs_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
+def timesJobs_scraper(sk='ai', exp=3, loc='bangalore'):
     """This function scrapes data from timesjobs.com
 
     Args:
@@ -18,7 +18,11 @@ def timesJobs_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
         exp (int, optional): [experience]. Defaults to 3.
         loc (str, optional): [loaction]. Defaults to 'bangalore'.
     """
-    
+    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
+                                        'Company website', 'Job locaion', 'Company name',
+                                        'Skill set required', 'Description url', 'Salary offered',
+                                        'Experience required', 'Qualification required'])
+
     sk = sk #skill
     exp = str(exp) # experience
     loc = loc #location
@@ -29,7 +33,7 @@ def timesJobs_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
             #source = urlopen(url)
             #soup = BeautifulSoup(source, 'html.parser')
             #all_jobs = soup.findAll('div', class_='card-body')
-            c = driver.get(url)#TODO make it generic
+            driver.get(url)#TODO make it generic
             driver.implicitly_wait(4)
             if(i == 1):
                 limit = driver.find_element_by_id('totolResultCountsId').text
@@ -102,11 +106,6 @@ def timesJobs_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
 
 
 if(__name__=='__main__'):
-    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
-                                        'Company website', 'Job locaion', 'Company name',
-                                        'Skill set required', 'Description url', 'Salary offered',
-                                        'Experience required', 'Qualification required'])
-
     timesJobs_scraper(dataframe)
 
 

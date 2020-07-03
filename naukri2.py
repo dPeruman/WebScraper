@@ -8,7 +8,7 @@ from urllib.request import urlopen
 ## And give the location of executable here
 PATH = "./chromedriver.exe"
 driver = webdriver.Chrome(PATH)
-def naukri_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
+def naukri_scraper(sk='ai', exp=3, loc='bangalore'):
     """This function scrapes data from naukri.com
 
     Args:
@@ -20,6 +20,11 @@ def naukri_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
     sk = sk #skill
     exp = 'experience='+str(exp) # experience
     loc = loc #location
+    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
+                                        'Company website', 'Job locaion', 'Company name',
+                                        'Skill set required', 'Description url', 'Salary offered',
+                                        'Experience required', 'Qualification required'])
+
 
     for i in range(1,1000):
 
@@ -168,10 +173,6 @@ def naukri_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
 
 
 if(__name__=='__main__'):
-    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
-                                        'Company website', 'Job locaion', 'Company name',
-                                        'Skill set required', 'Description url', 'Salary offered',
-                                        'Experience required', 'Qualification required'])
-
-    naukri_scraper(dataframe)
+    
+    naukri_scraper()
 

@@ -9,7 +9,7 @@ from urllib.request import urlopen
 PATH = "./chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
-def indeed_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
+def indeed_scraper(sk='ai', exp=3, loc='bangalore'):
     """This function scrapes data from indeed.com
 
     Args:
@@ -18,7 +18,11 @@ def indeed_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
         exp (int, optional): [experience]. Defaults to 3.
         loc (str, optional): [loaction]. Defaults to 'bangalore'.
     """
-    
+    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
+                                        'Company website', 'Job locaion', 'Company name',
+                                        'Skill set required', 'Description url', 'Salary offered',
+                                        'Experience required', 'Qualification required'])
+
     sk = sk #skill
     exp = str(exp) # experience
     loc = loc #location
@@ -97,11 +101,6 @@ def indeed_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
 
 
 if(__name__=='__main__'):
-    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
-                                        'Company website', 'Job locaion', 'Company name',
-                                        'Skill set required', 'Description url', 'Salary offered',
-                                        'Experience required', 'Qualification required'])
-
     indeed_scraper(dataframe, sk='mechanical engineer')
 
 

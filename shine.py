@@ -11,7 +11,7 @@ import time
 PATH = "C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
-def shine_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
+def shine_scraper(sk='ai', exp=3, loc='bangalore'):
     """This function scrapes data from timesjobs.com
 
     Args:
@@ -20,7 +20,11 @@ def shine_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
         exp (int, optional): [experience]. Defaults to 3.
         loc (str, optional): [loaction]. Defaults to 'bangalore'.
     """
-    
+    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
+                                        'Company website', 'Job locaion', 'Company name',
+                                        'Skill set required', 'Description url', 'Salary offered',
+                                        'Experience required', 'Qualification required'])
+
     sk = sk #skill
     if(exp > 24):
         exp = str(exp)+'+ Yrs'
@@ -164,11 +168,7 @@ def shine_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
 
 
 if(__name__=='__main__'):
-    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
-                                        'Company website', 'Job locaion', 'Company name',
-                                        'Skill set required', 'Description url', 'Salary offered',
-                                        'Experience required', 'Qualification required'])
-
-    shine_scraper(dataframe, sk='doctor', exp=11)#calls shine method
+    
+    shine_scraper()#calls shine method
 
 
