@@ -4,11 +4,14 @@ from bs4 import BeautifulSoup
 import requests
 from urllib.request import urlopen
 
-## Download the chromedriver
+## Download the chromedriver from : https://chromedriver.chromium.org/
 ## And give the location of executable here
-driver = webdriver.Chrome("C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe")
+PATH = "./chromedriver.exe"
+driver = webdriver.Chrome(PATH)
+
 def monster_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
-    """This function scrapes data from monsterindia.com
+    """
+    This function scrapes data from monsterindia.com
 
     Args:
         dataframe (pandas dataframe): [it stores the data]
@@ -16,16 +19,16 @@ def monster_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
         exp (int, optional): [experience]. Defaults to 3.
         loc (str, optional): [loaction]. Defaults to 'bangalore'.
     """
-    
+
     sk = sk #skill
     exp = str(exp) # experience
     loc = loc #location
 
     for i in range(0,2000,100):
 
-            if(i == 1):
+            if(i == 0):
             ##Step1: Get the page
-                url = 'https://www.monsterindia.com/srp/results?sort=1&limit=100query='+sk+'&locations='+loc+'&experienceRanges='+exp+'~'+exp+'&experience='+exp
+                url = 'https://www.monsterindia.com/srp/results?sort=1&limit=100&query='+sk+'&locations='+loc+'&experienceRanges='+exp+'~'+exp+'&experience='+exp
             else:
                 url = 'https://www.monsterindia.com/srp/results?start='+str(i)+'&sort=1&limit=100&query='+sk+'&locations='+loc+'&experienceRanges='+exp+'~'+exp+'&experience='+exp
             #source = urlopen(url)
@@ -190,5 +193,4 @@ if(__name__=='__main__'):
                                         'Experience required', 'Qualification required'])
 
     monster_scraper(dataframe)
-
 
