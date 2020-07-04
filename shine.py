@@ -15,7 +15,7 @@ def shine_scraper(sk='ai', exp=3, loc='bangalore'):
     """This function scrapes data from timesjobs.com
 
     Args:
-        dataframe (pandas dataframe): [it stores the data]
+        
         sk (str, optional): [skill]. Defaults to 'ai'.
         exp (int, optional): [experience]. Defaults to 3.
         loc (str, optional): [loaction]. Defaults to 'bangalore'.
