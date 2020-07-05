@@ -17,9 +17,9 @@ PATH = './chromedriver.exe'
 naukri2.PATH = monster.PATH = indeed.PATH = times_jobs.PATH = shine.PATH = linkedin.PATH = PATH\
 
 def main():
-    skill = input('Enter a skill')
-    location = input('Enter location')
-    experience = int(input('Enter experience in years'))
+    skill = input('Enter a skill: ')
+    location = input('Enter location: ')
+    experience = int(input('Enter experience in years: '))
 
     naukri2.naukri_scraper(sk=skill, exp=experience, loc=location)
     monster.monster_scraper(sk=skill, exp=experience, loc=location)
