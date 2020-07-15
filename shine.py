@@ -8,10 +8,10 @@ import time
 
 ## Download the chromedriver from : https://chromedriver.chromium.org/
 ## And give the location of executable here
-PATH = "./chromedriver.exe"
+PATH = "C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe"
 driver = webdriver.Chrome(PATH)
-
-def shine_scraper(sk='ai', exp=3, loc='bangalore'):
+temp = 0
+def shine_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
     """This function scrapes data from timesjobs.com
 
     Args:
@@ -20,10 +20,7 @@ def shine_scraper(sk='ai', exp=3, loc='bangalore'):
         exp (int, optional): [experience]. Defaults to 3.
         loc (str, optional): [loaction]. Defaults to 'bangalore'.
     """
-    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
-                                        'Company website', 'Job locaion', 'Company name',
-                                        'Skill set required', 'Description url', 'Salary offered',
-                                        'Experience required', 'Qualification required'])
+    
 
     sk = sk #skill
     if(exp > 24):
@@ -46,7 +43,7 @@ def shine_scraper(sk='ai', exp=3, loc='bangalore'):
     job_input.send_keys(sk)
     loc_input.send_keys(loc)
     exp_input.select_by_visible_text(exp)
-
+    temp = 0
 
     job_input.submit()
     driver.implicitly_wait(4)
@@ -65,8 +62,7 @@ def shine_scraper(sk='ai', exp=3, loc='bangalore'):
         pass            
 
 #https://www.shine.com/job-search/ai-jobs-in-bangalore-3?loc=Bangalore&minexp=4
-    for i in range(1,1000):
-            
+    for i in range(1,4):            
             try:
                 close = driver.find_element_by_css_selector('#id_registerPopModalCancel > span')#to close pop up if any
                 close.click()
@@ -164,11 +160,16 @@ def shine_scraper(sk='ai', exp=3, loc='bangalore'):
 
 
     driver.close()
-    dataframe.to_csv("shine.csv",index=False)
+    return dataframe
+    #dataframe.to_csv("shine.csv",index=False)
 
 
 if(__name__=='__main__'):
-    
-    shine_scraper()#calls shine method
+    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
+                                        'Company website', 'Job locaion', 'Company name',
+                                        'Skill set required', 'Description url', 'Salary offered',
+                                        'Experience required', 'Qualification required'])
+
+    shine_scraper(dataframe)#calls shine method
 
 

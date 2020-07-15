@@ -6,10 +6,10 @@ from urllib.request import urlopen
 
 ## Download the chromedriver from : https://chromedriver.chromium.org/
 ## And give the location of executable here
-PATH = "./chromedriver.exe"
+PATH = "C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
-def indeed_scraper(sk='ai', exp=3, loc='bangalore'):
+def indeed_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
     """This function scrapes data from indeed.com
 
     Args:
@@ -18,17 +18,13 @@ def indeed_scraper(sk='ai', exp=3, loc='bangalore'):
         exp (int, optional): [experience]. Defaults to 3.
         loc (str, optional): [loaction]. Defaults to 'bangalore'.
     """
-    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
-                                        'Company website', 'Job locaion', 'Company name',
-                                        'Skill set required', 'Description url', 'Salary offered',
-                                        'Experience required', 'Qualification required'])
-
+    
     sk = sk #skill
     exp = str(exp) # experience
     loc = loc #location
     temp = 0
 # ! https://www.indeed.co.in/jobs?q=ai&l=Bangalore&start=10
-    for i in range(0,5000,10):
+    for i in range(0,40,10):
 
             url = 'https://www.indeed.co.in/jobs?q='+sk+'&l='+loc+'&start='+str(i)
             #source = urlopen(url)
@@ -97,10 +93,17 @@ def indeed_scraper(sk='ai', exp=3, loc='bangalore'):
             if(temp >= limit):
                 break
     driver.close()
-    dataframe.to_csv("indeed.csv",index=False)
+    return dataframe
+    #dataframe.to_csv("indeed.csv",index=False)
 
 
 if(__name__=='__main__'):
-    indeed_scraper()
+
+    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
+                                        'Company website', 'Job locaion', 'Company name',
+                                        'Skill set required', 'Description url', 'Salary offered',
+                                        'Experience required', 'Qualification required'])
+
+    indeed_scraper(dataframe)
 
 

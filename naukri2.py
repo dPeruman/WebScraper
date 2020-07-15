@@ -6,9 +6,9 @@ from urllib.request import urlopen
 
 ## Download the chromedriver from : https://chromedriver.chromium.org/
 ## And give the location of executable here
-PATH = "./chromedriver.exe"
+PATH = "C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe"
 driver = webdriver.Chrome(PATH)
-def naukri_scraper(sk='ai', exp=3, loc='bangalore'):
+def naukri_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
     """This function scrapes data from naukri.com
 
     Args:
@@ -20,13 +20,9 @@ def naukri_scraper(sk='ai', exp=3, loc='bangalore'):
     sk = sk #skill
     exp = 'experience='+str(exp) # experience
     loc = loc #location
-    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
-                                        'Company website', 'Job locaion', 'Company name',
-                                        'Skill set required', 'Description url', 'Salary offered',
-                                        'Experience required', 'Qualification required'])
+    
 
-
-    for i in range(1,1000):
+    for i in range(1,4):
 
             if(i == 1):
             ##Step1: Get the page
@@ -169,10 +165,16 @@ def naukri_scraper(sk='ai', exp=3, loc='bangalore'):
                 break
 
     driver.close()
-    dataframe.to_csv("naukri.csv",index=False)
+    return dataframe
+    #dataframe.to_csv("naukri.csv",index=False)
 
 
 if(__name__=='__main__'):
     
-    naukri_scraper()
+    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
+                                        'Company website', 'Job locaion', 'Company name',
+                                        'Skill set required', 'Description url', 'Salary offered',
+                                        'Experience required', 'Qualification required'])
+
+    naukri_scraper(dataframe)
 

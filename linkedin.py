@@ -9,10 +9,10 @@ import time
 
 ## Download the chromedriver from : https://chromedriver.chromium.org/
 ## And give the location of executable here
-PATH = "./chromedriver.exe"
+PATH = "C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
-def linkedin_scraper(sk='ai', loc='bangalore'):
+def linkedin_scraper(dataframe,sk='ai', loc='bangalore'):
     """This function scrapes data from linkedin.com
 
     Args:
@@ -20,10 +20,6 @@ def linkedin_scraper(sk='ai', loc='bangalore'):
         sk (str, optional): [skill]. Defaults to 'ai'.
         loc (str, optional): [loaction]. Defaults to 'bangalore'.
     """
-    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
-                                        'Company website', 'Job locaion', 'Company name',
-                                        'Skill set required', 'Description url', 'Salary offered',
-                                        'Experience required', 'Qualification required'])
 
     sk = sk #skill
     loc = loc #location
@@ -75,7 +71,7 @@ def linkedin_scraper(sk='ai', loc='bangalore'):
     time.sleep(2)
 
     all_jobs = driver.find_elements_by_class_name('result-card')
-    for job in all_jobs:
+    for job in all_jobs[1:50]:
 
         result_html = job.get_attribute('innerHTML')
         soup = BeautifulSoup(result_html, 'html.parser')
@@ -130,11 +126,17 @@ def linkedin_scraper(sk='ai', loc='bangalore'):
 
 
     driver.close()
-    dataframe.to_csv("linkedin.csv",index=False)
+    return dataframe
+    #dataframe.to_csv("linkedin.csv",index=False)
 
 
 if(__name__=='__main__'):
     
-    linkedin_scraper() #calls linkedin_scraper method
+    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
+                                        'Company website', 'Job locaion', 'Company name',
+                                        'Skill set required', 'Description url', 'Salary offered',
+                                        'Experience required', 'Qualification required'])
+
+    linkedin_scraper(dataframe) #calls linkedin_scraper method
 
 

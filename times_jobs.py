@@ -6,10 +6,10 @@ from urllib.request import urlopen
 
 ## Download the chromedriver from : https://chromedriver.chromium.org/
 ## And give the location of executable here
-PATH = "./chromedriver.exe"
+PATH = "C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
-def timesJobs_scraper(sk='ai', exp=3, loc='bangalore'):
+def timesJobs_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
     """This function scrapes data from timesjobs.com
 
     Args:
@@ -18,16 +18,12 @@ def timesJobs_scraper(sk='ai', exp=3, loc='bangalore'):
         exp (int, optional): [experience]. Defaults to 3.
         loc (str, optional): [loaction]. Defaults to 'bangalore'.
     """
-    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
-                                        'Company website', 'Job locaion', 'Company name',
-                                        'Skill set required', 'Description url', 'Salary offered',
-                                        'Experience required', 'Qualification required'])
-
+    
     sk = sk #skill
     exp = str(exp) # experience
     loc = loc #location
 #https://www.timesjobs.com/candidate/job-search.html?from=submit&actualTxtKeywords=ai&txtLocation=Bangalore&luceneResultSize=100&postWeek=60&txtKeywords=ai&cboWorkExp1=3&pDate=I&sequence=1&startPage=1
-    for i in range(1,1000):
+    for i in range(1,4):
 
             url = 'https://www.timesjobs.com/candidate/job-search.html?searchType=personalizedSearch&from=submit&actualTxtKeywords='+sk+'&txtLocation='+loc+'&luceneResultSize=100&pstWeek=60&txtKeywords='+sk+'&cboWorkExp1='+exp+'&pDate=I&sequence='+str(i)+'&startPage=1'
             #source = urlopen(url)
@@ -102,10 +98,16 @@ def timesJobs_scraper(sk='ai', exp=3, loc='bangalore'):
             if(i >= limit):
                 break
     driver.close()
-    dataframe.to_csv("timesJobs.csv",index=False)
+    return dataframe
+    #dataframe.to_csv("timesJobs.csv",index=False)
 
 
 if(__name__=='__main__'):
+    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
+                                        'Company website', 'Job locaion', 'Company name',
+                                        'Skill set required', 'Description url', 'Salary offered',
+                                        'Experience required', 'Qualification required'])
+
     timesJobs_scraper(dataframe)
 
 

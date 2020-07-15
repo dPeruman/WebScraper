@@ -6,10 +6,10 @@ from urllib.request import urlopen
 
 ## Download the chromedriver from : https://chromedriver.chromium.org/
 ## And give the location of executable here
-PATH = "./chromedriver.exe"
+PATH = "C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
-def monster_scraper(sk='ai', exp=3, loc='bangalore'):
+def monster_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
     """
     This function scrapes data from monsterindia.com
 
@@ -19,16 +19,12 @@ def monster_scraper(sk='ai', exp=3, loc='bangalore'):
         exp (int, optional): [experience]. Defaults to 3.
         loc (str, optional): [loaction]. Defaults to 'bangalore'.
     """
-    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
-                                        'Company website', 'Job locaion', 'Company name',
-                                        'Skill set required', 'Description url', 'Salary offered',
-                                        'Experience required', 'Qualification required'])
-
+    
     sk = sk #skill
     exp = str(exp) # experience
     loc = loc #location
 
-    for i in range(0,2000,100):
+    for i in range(0,500,100):
 
             if(i == 0):
             ##Step1: Get the page
@@ -187,9 +183,16 @@ def monster_scraper(sk='ai', exp=3, loc='bangalore'):
             if((i+100) >= limit):
                 break
     driver.close()
-    dataframe.to_csv("monster.csv",index=False)
+    return dataframe
+    #dataframe.to_csv("monster.csv",index=False)
 
 
 if(__name__=='__main__'):
-    monster_scraper()
+
+    dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
+                                        'Company website', 'Job locaion', 'Company name',
+                                        'Skill set required', 'Description url', 'Salary offered',
+                                        'Experience required', 'Qualification required'])
+
+    monster_scraper(dataframe)
 
