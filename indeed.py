@@ -6,7 +6,7 @@ from urllib.request import urlopen
 
 ## Download the chromedriver from : https://chromedriver.chromium.org/
 ## And give the location of executable here
-PATH = "C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe"
+PATH = "/chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
 def indeed_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
@@ -86,7 +86,7 @@ def indeed_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
                 qualifications = 'NaN'
                 
                 dataframe = dataframe.append({'Recruiter name':recruiter_name, 'Recruter tel':phone_no, 'Recuiter mail id':email,
-                                        'Company website':web_, 'Job locaion':location, 'Company name':company,
+                                        'Company website':web_, 'Job location':location, 'Company name':company,
                                         'Skill set required':skill_list, 'Description url':desc_url, 'Salary offered':salary,
                                         'Experience required':experience, 'Qualification required':qualifications},ignore_index=True)
             
@@ -100,7 +100,7 @@ def indeed_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
 if(__name__=='__main__'):
 
     dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
-                                        'Company website', 'Job locaion', 'Company name',
+                                        'Company website', 'Job location', 'Company name',
                                         'Skill set required', 'Description url', 'Salary offered',
                                         'Experience required', 'Qualification required'])
 

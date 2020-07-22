@@ -6,7 +6,7 @@ from urllib.request import urlopen
 
 ## Download the chromedriver from : https://chromedriver.chromium.org/
 ## And give the location of executable here
-PATH = "C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe"
+PATH = "/chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 def naukri_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
     """This function scrapes data from naukri.com
@@ -22,7 +22,7 @@ def naukri_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
     loc = loc #location
     
 
-    for i in range(1,4):
+    for i in range(1,1000):
 
             if(i == 1):
             ##Step1: Get the page
@@ -158,7 +158,7 @@ def naukri_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
                 #driver.switch_to.window(driver.window_handles[0])
 
                 dataframe = dataframe.append({'Recruiter name':recruiter_name, 'Recruter tel':phone_no, 'Recuiter mail id':email,
-                                        'Company website':web_, 'Job locaion':location, 'Company name':company,
+                                        'Company website':web_, 'Job location':location, 'Company name':company,
                                         'Skill set required':skill_list, 'Description url':desc_url, 'Salary offered':salary,
                                         'Experience required':experience, 'Qualification required':qualifications},ignore_index=True)
             if(i >= limit):
@@ -172,7 +172,7 @@ def naukri_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
 if(__name__=='__main__'):
     
     dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
-                                        'Company website', 'Job locaion', 'Company name',
+                                        'Company website', 'Job location', 'Company name',
                                         'Skill set required', 'Description url', 'Salary offered',
                                         'Experience required', 'Qualification required'])
 

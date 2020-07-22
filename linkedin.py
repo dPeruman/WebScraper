@@ -1,15 +1,19 @@
 from selenium import webdriver
 import pandas as pd
 from bs4 import BeautifulSoup
-import requests
-from urllib.request import urlopen
-from selenium.webdriver.support.ui import Select
+#import requests
+#from urllib.request import urlopen
+#from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
 import time
 
+"""
+This code is scrape data from linkedin.com
+
+"""
 ## Download the chromedriver from : https://chromedriver.chromium.org/
 ## And give the location of executable here
-PATH = "C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe"
+PATH  = "/chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
 def linkedin_scraper(dataframe,sk='ai', loc='bangalore'):
@@ -71,7 +75,7 @@ def linkedin_scraper(dataframe,sk='ai', loc='bangalore'):
     time.sleep(2)
 
     all_jobs = driver.find_elements_by_class_name('result-card')
-    for job in all_jobs[1:50]:
+    for job in all_jobs:
 
         result_html = job.get_attribute('innerHTML')
         soup = BeautifulSoup(result_html, 'html.parser')
@@ -118,7 +122,7 @@ def linkedin_scraper(dataframe,sk='ai', loc='bangalore'):
         qualifications = 'NaN'
         
         dataframe = dataframe.append({'Recruiter name':recruiter_name, 'Recruter tel':phone_no, 'Recuiter mail id':email,
-                                'Company website':web_, 'Job locaion':location, 'Company name':company,
+                                'Company website':web_, 'Job location':location, 'Company name':company,
                                 'Skill set required':skill_list, 'Description url':desc_url, 'Salary offered':salary,
                                 'Experience required':experience, 'Qualification required':qualifications},ignore_index=True)
         
@@ -133,7 +137,7 @@ def linkedin_scraper(dataframe,sk='ai', loc='bangalore'):
 if(__name__=='__main__'):
     
     dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
-                                        'Company website', 'Job locaion', 'Company name',
+                                        'Company website', 'Job location', 'Company name',
                                         'Skill set required', 'Description url', 'Salary offered',
                                         'Experience required', 'Qualification required'])
 

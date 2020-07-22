@@ -6,7 +6,7 @@ from urllib.request import urlopen
 
 ## Download the chromedriver from : https://chromedriver.chromium.org/
 ## And give the location of executable here
-PATH = "C:\\Users\\DHEERAJ SKYLARK\\Downloads\\chromedriver_win32\\chromedriver.exe"
+PATH = "/chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
 def timesJobs_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
@@ -23,7 +23,7 @@ def timesJobs_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
     exp = str(exp) # experience
     loc = loc #location
 #https://www.timesjobs.com/candidate/job-search.html?from=submit&actualTxtKeywords=ai&txtLocation=Bangalore&luceneResultSize=100&postWeek=60&txtKeywords=ai&cboWorkExp1=3&pDate=I&sequence=1&startPage=1
-    for i in range(1,4):
+    for i in range(1,1000):
 
             url = 'https://www.timesjobs.com/candidate/job-search.html?searchType=personalizedSearch&from=submit&actualTxtKeywords='+sk+'&txtLocation='+loc+'&luceneResultSize=100&pstWeek=60&txtKeywords='+sk+'&cboWorkExp1='+exp+'&pDate=I&sequence='+str(i)+'&startPage=1'
             #source = urlopen(url)
@@ -91,7 +91,7 @@ def timesJobs_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
                 qualifications = 'NaN'
                 
                 dataframe = dataframe.append({'Recruiter name':recruiter_name, 'Recruter tel':phone_no, 'Recuiter mail id':email,
-                                        'Company website':web_, 'Job locaion':location, 'Company name':company,
+                                        'Company website':web_, 'Job location':location, 'Company name':company,
                                         'Skill set required':skill_list, 'Description url':desc_url, 'Salary offered':salary,
                                         'Experience required':experience, 'Qualification required':qualifications},ignore_index=True)
             
@@ -104,7 +104,7 @@ def timesJobs_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
 
 if(__name__=='__main__'):
     dataframe = pd.DataFrame(columns = ['Recruiter name', 'Recruter tel', 'Recuiter mail id',
-                                        'Company website', 'Job locaion', 'Company name',
+                                        'Company website', 'Job location', 'Company name',
                                         'Skill set required', 'Description url', 'Salary offered',
                                         'Experience required', 'Qualification required'])
 
