@@ -22,7 +22,7 @@ def naukri_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
     loc = loc #location
     
 
-    for i in range(1,1000):
+    for i in range(1,2000):
 
             if(i == 1):
             ##Step1: Get the page
