@@ -24,7 +24,7 @@ def indeed_scraper(dataframe, sk='ai', exp=3, loc='bangalore'):
     loc = loc #location
     temp = 0
 # ! https://www.indeed.co.in/jobs?q=ai&l=Bangalore&start=10
-    for i in range(0,40,10):
+    for i in range(0,1000,10):
 
             url = 'https://www.indeed.co.in/jobs?q='+sk+'&l='+loc+'&start='+str(i)
             #source = urlopen(url)
