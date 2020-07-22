@@ -1,3 +1,9 @@
 del.py
 del2.py
 .vscode/settings.json
+.vscode
+
+naukri_ipy.ipynb
+timesJobs.csv
+submit.py
+debug.log
